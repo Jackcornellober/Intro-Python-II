@@ -1,4 +1,5 @@
 from room import Room
+from player import Player
 
 # Declare all the rooms
 
@@ -39,6 +40,8 @@ room['treasure'].s_to = room['narrow']
 
 # Make a new player object that is currently in the 'outside' room.
 
+playerOne = Player("outside", "Jack")
+
 # Write a loop that:
 #
 # * Prints the current room name
@@ -49,3 +52,55 @@ room['treasure'].s_to = room['narrow']
 # Print an error message if the movement isn't allowed.
 #
 # If the user enters "q", quit the game.
+
+playing = 1
+
+while playing == 1:
+    print("\nCurrent room:", playerOne.currentRoom)
+    print("\n", room[playerOne.currentRoom].description)
+    x = input("Where would you like to go? Type Q to quit. ")
+
+    if (x == "q" or x == "Q"):
+        playing = 0
+
+    if x.upper() == "NORTH":
+        if room[playerOne.currentRoom.lower()].n_to in globals():
+            if room[playerOne.currentRoom.lower()].n_to == room['overlook']:
+                playerOne.currentRoom = 'overlook'
+            elif room[playerOne.currentRoom.lower()].n_to:
+                playerOne.currentRoom = room[playerOne.currentRoom].n_to.name.split(" ")[
+                    0].lower()
+        else:
+            print("There is nothing to the north.")
+
+    if x.upper() == "SOUTH":
+        if room[playerOne.currentRoom.lower()].n_to in globals():
+            if room[playerOne.currentRoom.lower()].n_to == room['overlook']:
+                playerOne.currentRoom = 'overlook'
+            elif room[playerOne.currentRoom.lower()].n_to:
+                playerOne.currentRoom = room[playerOne.currentRoom].n_to.name.split(" ")[
+                    0].lower()
+        else:
+            print("There is nothing to the south.")
+
+    if x.upper() == "EAST":
+        if room[playerOne.currentRoom.lower()].n_to in globals():
+            if room[playerOne.currentRoom.lower()].n_to == room['overlook']:
+                playerOne.currentRoom = 'overlook'
+            elif room[playerOne.currentRoom.lower()].n_to:
+                playerOne.currentRoom = room[playerOne.currentRoom].n_to.name.split(" ")[
+                    0].lower()
+        else:
+            print("There is nothing to the east.")
+
+    if x.upper() == "WEST":
+        if room[playerOne.currentRoom.lower()].n_to in globals():
+            if room[playerOne.currentRoom.lower()].n_to == room['overlook']:
+                playerOne.currentRoom = 'overlook'
+            elif room[playerOne.currentRoom.lower()].n_to:
+                playerOne.currentRoom = room[playerOne.currentRoom].n_to.name.split(" ")[
+                    0].lower()
+        else:
+            print("There is nothing to the west.")
+
+    print(playerOne.currentRoom)
