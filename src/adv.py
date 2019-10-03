@@ -56,15 +56,15 @@ playerOne = Player("outside", "Jack")
 playing = 1
 
 while playing == 1:
-    print("\nCurrent room:", playerOne.currentRoom)
-    print("\n", room[playerOne.currentRoom].description)
+    print("\nCurrent room:",playerOne.currentRoom)
+    print("\n",room[playerOne.currentRoom].description)
     x = input("Where would you like to go? Type Q to quit. ")
 
     if (x == "q" or x == "Q"):
         playing = 0
 
     if x.upper() == "NORTH":
-        if room[playerOne.currentRoom.lower()].n_to in globals():
+        if hasattr(room[playerOne.currentRoom.lower()], 'n_to'):
             if room[playerOne.currentRoom.lower()].n_to == room['overlook']:
                 playerOne.currentRoom = 'overlook'
             elif room[playerOne.currentRoom.lower()].n_to:
@@ -74,31 +74,31 @@ while playing == 1:
             print("There is nothing to the north.")
 
     if x.upper() == "SOUTH":
-        if room[playerOne.currentRoom.lower()].n_to in globals():
-            if room[playerOne.currentRoom.lower()].n_to == room['overlook']:
+        if hasattr(room[playerOne.currentRoom.lower()], 's_to'):
+            if room[playerOne.currentRoom.lower()].s_to == room['overlook']:
                 playerOne.currentRoom = 'overlook'
-            elif room[playerOne.currentRoom.lower()].n_to:
-                playerOne.currentRoom = room[playerOne.currentRoom].n_to.name.split(" ")[
+            elif room[playerOne.currentRoom.lower()].s_to:
+                playerOne.currentRoom = room[playerOne.currentRoom].s_to.name.split(" ")[
                     0].lower()
         else:
             print("There is nothing to the south.")
 
     if x.upper() == "EAST":
-        if room[playerOne.currentRoom.lower()].n_to in globals():
-            if room[playerOne.currentRoom.lower()].n_to == room['overlook']:
+        if hasattr(room[playerOne.currentRoom.lower()], 'e_to'):
+            if room[playerOne.currentRoom.lower()].e_to == room['overlook']:
                 playerOne.currentRoom = 'overlook'
-            elif room[playerOne.currentRoom.lower()].n_to:
-                playerOne.currentRoom = room[playerOne.currentRoom].n_to.name.split(" ")[
+            elif room[playerOne.currentRoom.lower()].e_to:
+                playerOne.currentRoom = room[playerOne.currentRoom].e_to.name.split(" ")[
                     0].lower()
         else:
             print("There is nothing to the east.")
 
     if x.upper() == "WEST":
-        if room[playerOne.currentRoom.lower()].n_to in globals():
-            if room[playerOne.currentRoom.lower()].n_to == room['overlook']:
+        if hasattr(room[playerOne.currentRoom.lower()], 'w_to'):
+            if room[playerOne.currentRoom.lower()].w_to == room['overlook']:
                 playerOne.currentRoom = 'overlook'
-            elif room[playerOne.currentRoom.lower()].n_to:
-                playerOne.currentRoom = room[playerOne.currentRoom].n_to.name.split(" ")[
+            elif room[playerOne.currentRoom.lower()].w_to:
+                playerOne.currentRoom = room[playerOne.currentRoom].w_to.name.split(" ")[
                     0].lower()
         else:
             print("There is nothing to the west.")
