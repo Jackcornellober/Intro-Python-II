@@ -5,21 +5,21 @@ from player import Player
 
 room = {
     'outside':  Room("Outside Cave Entrance",
-                     "North of you, the cave mount beckons"),
+                     "North of you, the cave mount beckons",["sword"]),
 
     'foyer':    Room("Foyer", """Dim light filters in from the south. Dusty
-passages run north and east."""),
+passages run north and east.""",["shield"]),
 
     'overlook': Room("Grand Overlook", """A steep cliff appears before you, falling
 into the darkness. Ahead to the north, a light flickers in
-the distance, but there is no way across the chasm."""),
+the distance, but there is no way across the chasm.""",["lamp"]),
 
     'narrow':   Room("Narrow Passage", """The narrow passage bends here from west
-to north. The smell of gold permeates the air."""),
+to north. The smell of gold permeates the air.""",["hose"]),
 
     'treasure': Room("Treasure Chamber", """You've found the long-lost treasure
 chamber! Sadly, it has already been completely emptied by
-earlier adventurers. The only exit is to the south."""),
+earlier adventurers. The only exit is to the south.""",["rose"]),
 }
 
 
@@ -56,8 +56,9 @@ playerOne = Player("outside", "Jack")
 playing = 1
 
 while playing == 1:
-    print("\nCurrent room:",playerOne.currentRoom)
+    print("\nCurrent room:", playerOne.currentRoom)
     print("\n",room[playerOne.currentRoom].description)
+    print(f"\n This room contains the following items: {room[playerOne.currentRoom].items}")
     x = input("Where would you like to go? Type Q to quit. ")
 
     if (x == "q" or x == "Q"):
@@ -102,5 +103,24 @@ while playing == 1:
                     0].lower()
         else:
             print("There is nothing to the west.")
+    
+    if len(x.split(" ")) > 1:
+        if "TAKE" == x.split(" ")[0].upper() or "GET" == x.split(" ")[0].upper():
+            if x.split(" ")[1] in room[playerOne.currentRoom].items:
+                room[playerOne.currentRoom].items.remove(x.split(" ")[1].lower())
+                playerOne.items.append(x.split(" ")[1].lower())
+
+                print ("items: ", playerOne.items)
+
+        if "DROP" == x.split(" ")[0].upper():
+                room[playerOne.currentRoom].items.append(x.split(" ")[1].lower())
+                playerOne.items.remove(x.split(" ")[1].lower())
+
+                print ("items: ", playerOne.items)
+
+    if x.upper() == "I" or x.upper() == "INVENTORY":
+        print("Current inventory: ", playerOne.items)
+
 
     print(playerOne.currentRoom)
+
